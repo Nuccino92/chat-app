@@ -1,0 +1,130 @@
+.Register {
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  border-radius: 8px;
+  height: 700px;
+}
+
+.Register-left {
+  background-color: rgb(116, 116, 221);
+  padding: 20px;
+  position: relative;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  width: 540px;
+}
+
+.Register-left > h1 {
+  margin: 30px 20px 10px 20px;
+}
+
+.Register-left > p {
+  font-size: 22px;
+  margin: 0 20px;
+}
+
+.Register-left > img {
+  object-fit: cover;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.Register-right {
+  padding: 50px 40px;
+  position: relative;
+}
+
+.Register-right > h1 {
+  padding-bottom: 16px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid rgb(183, 180, 190);
+}
+
+.Register-right > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Register-right > form > div {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.Register-right > form > div > div > input {
+  box-shadow: rgb(116, 116, 221) 0px 0px 2px 0px,
+    rgb(116, 116, 221) 0px 0px 1px 0px;
+}
+
+.Register-right > form > input {
+  margin-bottom: 24px;
+  box-shadow: rgb(116, 116, 221) 0px 0px 2px 0px,
+    rgb(116, 116, 221) 0px 0px 1px 0px;
+}
+
+.Register-right > form > label {
+  margin-bottom: 7px;
+}
+
+.name-input-container {
+  display: flex;
+  flex-direction: column;
+}
+.Register-right > form > button {
+  background-image: linear-gradient(#0dccea, #0d70ea);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 3px 7px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 200px;
+  align-self: center;
+  margin-top: 30px;
+}
+
+.Register-right > form > button:hover {
+  transform: scale(1.04);
+  -webkit-transform: scale(1.04);
+  -moz-transform: scale(1.04);
+}
+
+.Register-right > form > button:active {
+  transform: scale(0.98);
+  -webkit-transform: scale(0.98);
+  -moz-transform: scale(0.98);
+}
+
+.register-form-login {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.Register-right > img {
+  position: absolute;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  margin-top: 100px;
+}
