@@ -1,0 +1,128 @@
+.Login {
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 8px;
+  background-color: white;
+  height: 800px;
+}
+
+.Login-left {
+  position: relative;
+  background-color: #6b85db;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  width: 500px;
+}
+
+.Login-left > img {
+  position: absolute;
+  bottom: 0;
+  object-fit: cover;
+  width: 500px;
+  align-self: center;
+}
+
+.Login-left > h1 {
+  margin: 40px 20px 10px 30px;
+}
+
+.Login-left > p {
+  font-size: 22px;
+  margin: 0 30px;
+}
+
+.Login-right {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.Login-right > img {
+  height: 95px;
+  width: 95px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Login-right > h1 {
+  font-size: 55px;
+  font-weight: 900;
+}
+
+.Login-right > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.Login-right > form > input {
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.Login-right > form > button {
+  background-image: linear-gradient(#0dccea, #0d70ea);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 3px 7px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.Login-right > form > button:hover {
+  transform: scale(1.04);
+  -webkit-transform: scale(1.04);
+  -moz-transform: scale(1.04);
+}
+
+.Login-right > form > button:active {
+  transform: scale(0.98);
+  -webkit-transform: scale(0.98);
+  -moz-transform: scale(0.98);
+}
+
+.login-form-signup {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+@media (max-width: 940px) {
+  .Login {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 750px) {
+  .Login {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 560px) {
+  .Login {
+    transform: scale(0.4);
+  }
+}
+
+@media (max-width: 370px) {
+  .Login {
+    transform: scale(0.3);
+  }
+}
