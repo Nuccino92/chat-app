@@ -117,12 +117,15 @@
 
 @media (max-width: 560px) {
   .Login {
-    transform: scale(0.4);
+    transform: scale(0.9);
+  }
+  .Login-left {
+    display: none;
   }
 }
 
 @media (max-width: 370px) {
   .Login {
-    transform: scale(0.3);
+    transform: scale(0.6);
   }
 }

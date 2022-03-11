@@ -128,3 +128,36 @@
   -moz-transform: translate(-50%, -50%);
   margin-top: 100px;
 }
+
+@media (max-width: 1230px) {
+  .Register {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 990px) {
+  .Register {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 740px) {
+  .Register {
+    transform: scale(0.9);
+  }
+  .Register-left {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .Register {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 350px) {
+  .Register {
+    transform: scale(0.5);
+  }
+}
