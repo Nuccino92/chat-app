@@ -7,7 +7,7 @@
   font-family: "Josefin Sans", sans-serif;
 }
 body {
-  background-color: rgb(157, 208, 255);
+  background: #add8e6;
 }
 
 input {
@@ -23,4 +23,8 @@ input {
 ::placeholder {
   font-size: 18px;
   color: rgb(172, 172, 172);
+}
+
+ul {
+  list-style-type: none;
 }
