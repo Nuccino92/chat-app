@@ -1,0 +1,32 @@
+.MessageDisplay {
+  padding-top: 10px;
+}
+
+.MessageDisplay > h3 {
+  margin: 10px 0 10px 15px;
+}
+
+.MessageDisplayCard {
+  display: flex;
+  cursor: pointer;
+  padding: 10px 10px;
+}
+
+.MessageDisplayCard:hover {
+  background-color: #034deb78;
+}
+
+.MessageDisplayCard > img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.MessageDisplayCard > div > h4 {
+  margin: 3px 0;
+}
+
+.MessageDisplayCard > div > p {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
