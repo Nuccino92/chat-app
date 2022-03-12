@@ -1,0 +1,94 @@
+.ChatWindow {
+  width: 500px;
+  border-left: 2px solid rgba(128, 128, 128, 0.15);
+  position: relative;
+}
+
+.ChatWindow > header {
+  border-bottom: 2px solid rgba(128, 128, 128, 0.15);
+  padding: 4px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ChatWindow > header > img {
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+}
+
+.ChatWindow-body {
+  background-color: rgb(243, 249, 253);
+  overflow-y: scroll;
+  height: 695px;
+}
+
+.ChatWindow-body::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.ChatWindow-body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+.ChatWindow-body::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 162, 255);
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+
+.ChatWindow > footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 7px 5px;
+  border-top: 2px solid rgba(128, 128, 128, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background-color: white;
+}
+
+.send-message-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(193, 196, 207, 0.192);
+  padding: 4px 10px;
+  border-radius: 20px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.send-message-container > input {
+  box-shadow: none;
+  background: none;
+  font-size: 17px;
+}
+
+.send-message-button {
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: rgb(85, 45, 218);
+}
+
+.send-message-button:hover {
+  filter: brightness(1.2);
+}
+
+.send-message-button:active {
+  filter: brightness(0.9);
+}
