@@ -7,3 +7,26 @@
 .Application-body {
   display: flex;
 }
+
+@media (max-width: 844px) {
+  .Application {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 676px) {
+  .Application {
+    transform: scale(0.6);
+  }
+}
+@media (max-width: 510px) {
+  .Application {
+    transform: scale(0.4);
+  }
+}
+
+@media (max-width: 300px) {
+  .Application {
+    transform: scale(0.35);
+  }
+}
