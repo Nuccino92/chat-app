@@ -1,0 +1,75 @@
+.Contacts {
+  padding: 20px 40px;
+  max-height: 800px;
+  height: 800px;
+  overflow-y: scroll;
+  background-color: rgb(243, 249, 253);
+  border-radius: 8px;
+}
+
+.Contacts > div > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.Contacts-searchbar-container {
+  border: 1px solid rgba(128, 128, 128, 0.057);
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+}
+
+.Contacts-searchbar-container > input {
+  border: none;
+  box-shadow: none;
+  font-size: 17px;
+  background: none;
+}
+
+.add-contact-button {
+  align-items: center;
+  appearance: none;
+  background-color: #3eb2fd;
+  background-image: linear-gradient(1deg, #4f58fd, #149bf3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s, background-position 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+  content: attr(title);
+}
+
+.add-contact-button:active,
+.add-contact-button:focus {
+  outline: none;
+}
+
+.add-contact-button:hover {
+  background-position: -20px -20px;
+}
+
+.add-contact-button:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 0.125em;
+}
