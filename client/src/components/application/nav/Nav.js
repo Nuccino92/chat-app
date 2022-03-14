@@ -1,7 +1,7 @@
 import "./Nav.css";
 import logo from "../../../images/chatify-logo.png";
 
-const Nav = () => {
+const Nav = ({ setTab }) => {
   return (
     <div className="Nav">
       <div className="Nav-left">
@@ -10,10 +10,10 @@ const Nav = () => {
       </div>
       <div className="Nav-right">
         <ul>
-          <li>Home</li>
-          <li>Contacts</li>
-          <li>Groups</li>
+          <li onClick={() => setTab("home")}>Home</li>
+          <li onClick={() => setTab("contacts")}>Contacts</li>
           <img
+            onClick={() => setTab("profile")}
             src="https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg"
             alt="Profile"
           ></img>
