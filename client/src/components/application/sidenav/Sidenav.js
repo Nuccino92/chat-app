@@ -1,6 +1,7 @@
 import "./Sidenav.css";
 import { BiSearchAlt2 } from "react-icons/bi";
 import MessageDisplay from "./messagedisplay/MessageDisplay";
+import FriendRequests from "./friendrequests/FriendRequests";
 
 const Sidenav = () => {
   return (
@@ -10,6 +11,7 @@ const Sidenav = () => {
         <input type="text" placeholder="search" />
       </div>
       <MessageDisplay />
+      <FriendRequests />
     </div>
   );
 };
