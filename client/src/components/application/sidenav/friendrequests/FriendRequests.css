@@ -1,0 +1,44 @@
+.FriendRequests > h3 {
+  margin: 15px 0 15px 15px;
+}
+
+.FriendRequests-body {
+  height: 310px;
+  overflow-y: scroll;
+}
+
+.FriendRequestsCard {
+  display: flex;
+  padding: 10px 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.FriendRequestsCard > div > img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.FriendRequestsCard > div {
+  display: flex;
+  align-items: center;
+}
+
+.FriendRequestsCard > div > h4 {
+  margin: 3px 0;
+}
+
+.FriendRequestsCard > div > p {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.FriendRequestsCard > div > svg {
+  cursor: pointer;
+}
+
+.FriendRequestsCard > div > svg:hover {
+  transform: scale(1.1);
+  filter: brightness(1.5);
+}
