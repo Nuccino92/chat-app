@@ -30,7 +30,12 @@
 
 .Nav-right > ul > img {
   cursor: pointer;
-  height: 55px;
-  width: 55px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
+  border: 2px solid rgb(22, 18, 241);
+}
+
+.Nav-right > ul > img:hover {
+  border: 2px solid rgb(0, 128, 17);
 }
