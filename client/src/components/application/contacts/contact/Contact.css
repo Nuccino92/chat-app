@@ -1,0 +1,54 @@
+.Contact {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  padding: 11px 11px 11px 0;
+  margin: 10px 0;
+  border-radius: 8px;
+  width: 600px;
+  background-color: white;
+  border: 1px solid rgba(128, 128, 128, 0.057);
+}
+
+.Contact:hover {
+  background-color: rgba(0, 72, 187, 0.219);
+}
+
+.Contact > img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.Contact > div {
+  width: 100%;
+}
+
+.Contact > div > div > h4 {
+  margin-bottom: 3px;
+}
+
+.Contact > div > div > p {
+  margin-bottom: 3px;
+  font-size: 14px;
+}
+
+.Contact > div > p {
+  max-width: 80%;
+  width: 80%;
+  word-wrap: break-word;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 15px;
+  opacity: 0.5;
+  font-weight: 600;
+}
+
+.delete-contact {
+  color: rgb(158, 8, 8);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 20px 20px 0;
+  content: attr(title);
+}
