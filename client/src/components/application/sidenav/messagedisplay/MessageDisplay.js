@@ -5,11 +5,17 @@ import MessageDisplayCard from "./MessageDisplayCard";
 const MessageDisplay = () => {
   return (
     <div className="MessageDisplay">
-      <h3>Mesages</h3>
-      <MessageDisplayCard />
-      <MessageDisplayCard />
-      <MessageDisplayCard />
-      <MessageDisplayCard />
+      <h3>Chats</h3>
+      <div className="MessageDisplay-body">
+        <MessageDisplayCard />
+        <MessageDisplayCard />
+        <MessageDisplayCard />
+        <MessageDisplayCard />
+        <MessageDisplayCard />
+        <MessageDisplayCard />
+        <MessageDisplayCard />
+        <MessageDisplayCard />
+      </div>
     </div>
   );
 };
