@@ -1,14 +1,22 @@
 "use strict";
 module.exports = {
   async up(queryInterface, DataTypes) {
-    await queryInterface.createTable("contacts", {
+    await queryInterface.createTable("messages", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      userID1: {
+      conversationID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Conversations",
+          key: "id",
+        },
+      },
+      senderID: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -16,16 +24,8 @@ module.exports = {
           key: "id",
         },
       },
-      userID2: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-      },
-      confirmed: {
-        type: DataTypes.INTEGER,
+      content: {
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       createdAt: {
@@ -39,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, DataTypes) {
-    await queryInterface.dropTable("contacts");
+    await queryInterface.dropTable("messages");
   },
 };
