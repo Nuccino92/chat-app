@@ -1,15 +1,27 @@
 const { sequelize, Contact } = require("../models");
 
-const requestContact_POST = async (req, res) => {
-  const { user2 } = req.body;
-  const { user1 } = req.params;
+const allContacts_GET = async (req, res) => {
+  res.send("got all contacts");
+};
 
-  const contact = 0;
+const confirmedContacts_GET = async (req, res) => {
+  res.send("got all accepted contacts ");
+};
+
+const pendingContact_GET = async (req, res) => {
+  res.send("got all pending contacts");
+};
+
+const createContact_POST = async (req, res) => {
+  const { user2 } = req.body;
+  const { id } = req.params;
+
+  const confirmed = 0;
 
   await Contact.create({
-    user1,
-    user2,
-    contact,
+    userID1: id,
+    userID2: user2,
+    confirmed,
   })
     .then((response) => {
       return res.status(201).json(response);
@@ -19,6 +31,19 @@ const requestContact_POST = async (req, res) => {
     });
 };
 
+const acceptContact_POST = async (req, res) => {
+  res.send("accepted");
+};
+
+const declineContact_POST = async (req, res) => {
+  res.send("declined");
+};
+
 module.exports = {
-  requestContact_POST,
+  createContact_POST,
+  acceptContact_POST,
+  declineContact_POST,
+  allContacts_GET,
+  confirmedContacts_GET,
+  pendingContact_GET,
 };
