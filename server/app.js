@@ -6,6 +6,9 @@ const { sequelize } = require("./models");
 
 const registerRoutes = require("./routes/register.js");
 const contactRoutes = require("./routes/contacts.js");
+const logInRoutes = require("./routes/logIn.js");
+const conversationRoutes = require("./routes/conversation.js");
+const messageRoutes = require("./routes/messages.js");
 
 const app = express();
 
@@ -22,3 +25,6 @@ app.listen(PORT, async () => {
 
 app.use("/register", registerRoutes);
 app.use("/contact", contactRoutes);
+app.use("/logIn", logInRoutes);
+app.use("/conversation", conversationRoutes);
+app.use("/messages", messageRoutes);
