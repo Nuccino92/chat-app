@@ -9,17 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ User }) {
       // define association here
-      Contact.belongsTo(
-        User,
-        {
-          foreignKey: "userID1",
-          as: "contactUser",
-        },
-        {
-          foreignKey: "userID2",
-          as: "contactUser",
-        }
-      );
+      Contact.belongsTo(User, {
+        foreignKey: "userID1",
+        as: "contactUser1",
+      });
+      Contact.belongsTo(User, {
+        foreignKey: "userID2",
+        as: "contactUser2",
+      });
     }
   }
   Contact.init(

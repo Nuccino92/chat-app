@@ -9,23 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Contact, Conversations, Messages }) {
       // define association here
-      this.hasMany(
-        Contact,
-        { foreignKey: "userID1", as: "contacts" },
-        { foreignKey: "userID2", as: "contacts" }
-      );
+      this.hasMany(Contact, { foreignKey: "userID1", as: "contact1" });
+      this.hasMany(Contact, { foreignKey: "userID2", as: "contact2" });
 
-      this.hasMany(
-        Conversations,
-        {
-          foreignKey: "userID1",
-          as: "conversations",
-        },
-        {
-          foreignKey: "userID2",
-          as: "conversations",
-        }
-      );
+      this.hasMany(Conversations, {
+        foreignKey: "userID1",
+        as: "conversationsUser1",
+      });
+      this.hasMany(Conversations, {
+        foreignKey: "userID2",
+        as: "conversationsUser2",
+      });
 
       this.hasMany(Messages, { foreignKey: "senderID", as: "messages" });
     }
