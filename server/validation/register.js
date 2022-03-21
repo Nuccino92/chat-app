@@ -33,8 +33,9 @@ const registerValidation = [
     .withMessage("Invalid email adress")
     .bail()
     .custom(async (email) => {
+      const newEmail = email.toLowerCase();
       const existing = await User.findOne({
-        email: new RegExp("^" + email + "$", "i"),
+        where: { email: newEmail },
       });
       if (existing) {
         return Promise.reject("Email taken");
