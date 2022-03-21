@@ -1,13 +1,49 @@
+const { Conversations, Messages } = require("../models");
+const { Op } = require("sequelize");
+
 const getConversation_GET = async (req, res) => {
-  res.send("got the convo");
+  const { user1, user2 } = req.params;
+
+  await Conversations.findOne({
+    where: {
+      [Op.or]: [{ userID1: user1 }, { userID2: user1 }],
+      [Op.or]: [{ userID1: user2 }, { userID2: user2 }],
+    },
+  })
+    .then(async (conversation) => {
+      return res.status(201).json(conversation);
+    })
+    .catch((err) => {
+      return res.status(500).json({ error: "Oops! Unable to update user" });
+    });
 };
 
 const startConversation_POST = async (req, res) => {
-  res.send("started convo");
+  const { id } = req.params;
+  const { user2 } = req.body;
+
+  await Conversations.create({
+    userID1: id,
+    userID2: user2,
+  })
+    .then((conversation) => {
+      return res.status(201).json(conversation);
+    })
+    .catch((err) => {
+      return res.status(500).kson(err);
+    });
 };
 
 const getConversationMessages_GET = async (req, res) => {
-  res.send("get convo messages");
+  const { conversationID } = req.params;
+
+  await Messages.findAll({ where: { conversationID } })
+    .then((messages) => {
+      return res.status(201).json(messages);
+    })
+    .catch((err) => {
+      return res.status(500).json(err);
+    });
 };
 
 module.exports = {
