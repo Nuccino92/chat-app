@@ -11,6 +11,7 @@ const contactRoutes = require("./routes/contacts.js");
 const logInRoutes = require("./routes/logIn.js");
 const conversationRoutes = require("./routes/conversation.js");
 const messageRoutes = require("./routes/messages.js");
+const userRoutes = require("./routes/users.js");
 
 const app = express();
 
@@ -33,3 +34,4 @@ app.use("/contact", contactRoutes);
 app.use("/logIn", logInRoutes);
 app.use("/conversation", conversationRoutes);
 app.use("/messages", messageRoutes);
+app.use("/user", userRoutes);
