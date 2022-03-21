@@ -1,8 +1,8 @@
 const express = require("express");
 const {
   createContact_POST,
-  acceptContact_POST,
-  declineContact_POST,
+  acceptContact_PUT,
+  declineContact_DELETE,
   allContacts_GET,
   confirmedContacts_GET,
   pendingContact_GET,
@@ -15,7 +15,9 @@ router.get("/:id", allContacts_GET);
 router.get("/confirmed/:id", confirmedContacts_GET);
 router.get("/pending/:id", pendingContact_GET);
 router.post("/create/:id", createContact_POST);
-router.post("/accept/:id", acceptContact_POST);
-router.post("/decline/:id", declineContact_POST);
+router.put("/accept/:id", acceptContact_PUT);
+
+//deletes contact table
+router.delete("/decline/:id", declineContact_DELETE);
 
 module.exports = router;
