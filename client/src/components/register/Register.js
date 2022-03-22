@@ -2,12 +2,54 @@ import "./Register.css";
 import usingComputer from "../../images/register.png";
 import chatifyLogo from "../../images/chatify-logo.png";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/actions/user";
+import FormError from "../formError/FormError";
 
 const Register = () => {
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log("created");
+  const dispatch = useDispatch();
+  const { message, param, id } = useSelector((state) => state.errorReducer);
+
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    profilePicture:
+      "https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg",
+  });
+
+  const [error, setError] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setUserData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+
+    setError({
+      errors: false,
+      message: "",
+      param: "",
+      id: null,
+    });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(registerUser(userData));
+  };
+
+  useEffect(() => {
+    if (message) {
+      setError(true);
+    }
+  }, [message]);
 
   return (
     <div className="Register">
@@ -24,29 +66,36 @@ const Register = () => {
               className="name-input-container"
               style={{ marginRight: "10px" }}
             >
-              <label htmlFor="firstname" style={{ marginBottom: "7px" }}>
+              <label htmlFor="firstName" style={{ marginBottom: "7px" }}>
                 First Name
               </label>
-              <input name="firstname" type="text" />
+              <input onChange={handleChange} name="firstName" type="text" />
             </div>
             <div className="name-input-container">
-              <label htmlFor="lastname" style={{ marginBottom: "7px" }}>
+              <label htmlFor="lastName" style={{ marginBottom: "7px" }}>
                 Last Name
               </label>
-              <input name="lastname" type="text" />
+              <input onChange={handleChange} name="lastName" type="text" />
             </div>
           </div>
 
           <label htmlFor="email">Email</label>
-          <input name="email" type="text" placeholder="example@example.com" />
+          <input
+            onChange={handleChange}
+            name="email"
+            type="text"
+            placeholder="example@example.com"
+          />
           <label htmlFor="password">Password</label>
           <input
+            onChange={handleChange}
             name="password"
             type="password"
             placeholder="must be at least 6 characters"
           />
-          <button onClick={handleClick}>Create Account</button>
+          <button onClick={handleSubmit}>Create Account</button>
         </form>
+        {error && <FormError message={message} />}
         <img src={chatifyLogo} alt="chat app logo"></img>
         <div className="register-form-login">
           Already have an account? <Link to="/">Log in</Link>
