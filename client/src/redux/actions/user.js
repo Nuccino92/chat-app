@@ -1,4 +1,7 @@
+import { logInRequest } from "../../api/logIn";
 import { registerRequest } from "../../api/register";
+import { userAuthRequest } from "../../api/users";
+import { tokenConfig } from "../../config/token";
 import { returnErrors } from "./error";
 
 import {
@@ -33,8 +36,37 @@ export const registerUser = (userData) => async (dispatch) => {
     });
 };
 
-export const logInUser = () => {};
+export const logInUser = (userData) => async (dispatch) => {
+  await logInRequest(userData)
+    .then((res) => {
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      dispatch(returnErrors(null, null, null));
+    })
+    .catch((err) => {
+      dispatch({
+        type: LOGIN_FAIL,
+      });
+      dispatch(
+        returnErrors(
+          err.response.data.msg,
+          err.response.status,
+          err.response.data.param
+        )
+      );
+    });
+};
 
-export const loadUser = () => {};
+export const loadUser = () => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
+  await userAuthRequest(tokenConfig())
+    .then((res) => {
+      dispatch({ type: USER_LOADED, payload: res.data });
+    })
+    .catch(() => {
+      dispatch({ type: AUTH_ERR });
+    });
+};
 
-export const logOutUser = () => {};
+export const logOutUser = () => (dispatch) => {
+  dispatch({ type: LOGOUT_SUCCESS });
+};
