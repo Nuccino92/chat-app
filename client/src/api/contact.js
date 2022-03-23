@@ -3,10 +3,14 @@ import axios from "axios";
 const url = "http://localhost:8000/contact/";
 
 //GET
-export const getAllContactsRequest = () => {
-  //PARAMS
-  console.log("all contacts");
-};
+export const getAllContactsRequest = (id) =>
+  axios({
+    method: "get",
+    url: url + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
 //GET
 export const getConfirmedContactsRequest = () => {
@@ -21,10 +25,17 @@ export const getPendingContactsRequest = () => {
 };
 
 //POST
-export const createContactRequest = (body) => {
-  //PARAMS
-  console.log("contact created");
-};
+export const createContactRequest = (id, body) =>
+  axios({
+    method: "post",
+    url: url + "create/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data: {
+      user2: body,
+    },
+  });
 
 //PUT
 export const acceptContactRequest = (body) => {
