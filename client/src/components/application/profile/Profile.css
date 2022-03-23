@@ -26,7 +26,11 @@
 }
 
 .Profile-body > h3 {
-  margin-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.Profile-body > p {
+  font-size: 20px;
 }
 
 .Profile-body > img {
