@@ -1,10 +1,9 @@
 const { User } = require("../models");
+const cloudinary = require("../utils/cloudinary.js");
 
 // returns user if passes passport auth jwt
 const authUser_GET = async (req, res) => {
-  const { id } = req.params;
-
-  await User.findByPk(id)
+  await User.findByPk(req.user.id)
     .then((user) => {
       res.status(200).json(user);
     })
@@ -16,11 +15,19 @@ const authUser_GET = async (req, res) => {
 // updates user
 const updateUser_PUT = async (req, res) => {
   const { id } = req.params;
-  const { firstName, lastName, profilePicture } = req.body;
+  const { firstName, lastName } = req.body;
+
+  const { path } = req.file;
+
+  const result = await cloudinary.uploader.upload(path);
 
   await User.findByPk(id)
     .then(async (user) => {
-      await user.update({ firstName, lastName, profilePicture });
+      await user.update({
+        firstName,
+        lastName,
+        profilePicture: result.secure_url,
+      });
       await user.save();
       return res.status(201).json(user);
     })
