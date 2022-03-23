@@ -15,18 +15,19 @@ const logIn_POST = async (req, res, next) => {
     }
     if (!password) {
       return res.status(401).json({
-        message: "Please enter password",
+        msg: "Please enter a password",
         param: "password",
       });
     }
     if (err) {
       return res.status(401).json({
-        message: err.message,
+        msg: err.message,
+        param: null,
       });
     }
     if (!user) {
       return res.status(401).json({
-        message: "You entered the incorrect information",
+        msg: "You entered incorrect information",
         user: user,
         param: null,
       });
