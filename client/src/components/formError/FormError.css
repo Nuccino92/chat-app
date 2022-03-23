@@ -1,0 +1,10 @@
+.FormError {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: rgb(214, 35, 35);
+  font-weight: 600;
+}
