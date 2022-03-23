@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/actions/user";
 import FormError from "../formError/FormError";
+import { clearErrors } from "../../redux/actions/error";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -32,17 +33,16 @@ const Register = () => {
       };
     });
 
-    setError({
-      errors: false,
-      message: "",
-      param: "",
-      id: null,
-    });
+    dispatch(clearErrors());
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerUser(userData));
+
+    if (message) {
+      setError(true);
+    }
   };
 
   useEffect(() => {
@@ -50,6 +50,11 @@ const Register = () => {
       setError(true);
     }
   }, [message]);
+
+  //clear errors on mount
+  useEffect(() => {
+    dispatch(clearErrors());
+  }, [dispatch]);
 
   return (
     <div className="Register">
@@ -93,9 +98,9 @@ const Register = () => {
             type="password"
             placeholder="must be at least 6 characters"
           />
+          {error && <FormError message={message} location={"register"} />}
           <button onClick={handleSubmit}>Create Account</button>
         </form>
-        {error && <FormError message={message} />}
         <img src={chatifyLogo} alt="chat app logo"></img>
         <div className="register-form-login">
           Already have an account? <Link to="/">Log in</Link>

@@ -45,6 +45,7 @@
 .Register-right > form {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .Register-right > form > div {
