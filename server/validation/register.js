@@ -30,7 +30,7 @@ const registerValidation = [
     .withMessage("Email must be between 2 and 30 characters")
     .bail()
     .isEmail()
-    .withMessage("Invalid email adress")
+    .withMessage("Invalid email address")
     .bail()
     .custom(async (email) => {
       const newEmail = email.toLowerCase();
