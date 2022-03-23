@@ -2,14 +2,15 @@ import axios from "axios";
 
 const url = "http://localhost:8000/user/";
 
-//GET
-export const userAuthRequest = () => {
-  //PARAMS
-  console.log("userAuthRequest");
-};
+export const userAuthRequest = (headers) => axios.get(url + "auth", headers);
 
 //PUT
-export const getUserRequest = (body) => {
-  //PARAMS
-  console.log("getUserRequest");
-};
+export const updateUserRequest = (id, data) =>
+  axios({
+    method: "put",
+    url: url + `/${id}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data,
+  });
