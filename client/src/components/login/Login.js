@@ -2,12 +2,54 @@ import "./Login.css";
 import chatifyLogo from "../../images/chatify-logo.png";
 import talkPhoto from "../../images/talk.png";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FormError from "../formError/FormError";
+import { clearErrors } from "../../redux/actions/error";
+import { logInUser } from "../../redux/actions/user";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { message } = useSelector((state) => state.errorReducer);
+
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
+    dispatch(logInUser(userData));
+
+    if (message) {
+      setError(true);
+    }
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setUserData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+    dispatch(clearErrors());
+  };
+
+  useEffect(() => {
+    if (message) {
+      setError(true);
+    }
+  }, [message]);
+
+  //clear errors on mount
+  useEffect(() => {
+    dispatch(clearErrors());
+  }, [dispatch]);
 
   return (
     <div className="Login">
@@ -20,9 +62,20 @@ const Login = () => {
         <img src={chatifyLogo} alt="Chatify Logo"></img>
         <h1>ChatApp</h1>
         <form>
-          <input name="email" type="text" placeholder="email" />
-          <input name="password" type="password" placeholder="password" />
+          <input
+            onChange={handleChange}
+            name="email"
+            type="text"
+            placeholder="email"
+          />
+          <input
+            onChange={handleChange}
+            name="password"
+            type="password"
+            placeholder="password"
+          />
           <button onClick={handleSubmit}>Log in</button>
+          {error && <FormError message={message} location={"logIn"} />}
         </form>
 
         <div className="login-form-signup">
