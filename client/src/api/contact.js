@@ -2,7 +2,6 @@ import axios from "axios";
 
 const url = "http://localhost:8000/contact/";
 
-//GET
 export const getAllContactsRequest = (id) =>
   axios({
     method: "get",
@@ -12,19 +11,24 @@ export const getAllContactsRequest = (id) =>
     },
   });
 
-//GET
-export const getConfirmedContactsRequest = () => {
-  //PARAMS
-  console.log("get confirmed contacts");
-};
+export const getConfirmedContactsRequest = (id) =>
+  axios({
+    method: "get",
+    url: url + "confirmed/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
-//GET
-export const getPendingContactsRequest = () => {
-  //PARAMS
-  console.log("got pending contacts");
-};
+export const getPendingContactsRequest = (id) =>
+  axios({
+    method: "get",
+    url: url + "pending/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
-//POST
 export const createContactRequest = (id, body) =>
   axios({
     method: "post",
@@ -37,14 +41,20 @@ export const createContactRequest = (id, body) =>
     },
   });
 
-//PUT
-export const acceptContactRequest = (body) => {
-  //PARAMS
-  console.log("contact accepted");
-};
+export const acceptContactRequest = (id) =>
+  axios({
+    method: "put",
+    url: url + "accept/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
-//DELETE
-export const deleteContactRequest = (body) => {
-  //PARAMS
-  console.log("contact deleted");
-};
+export const deleteContactRequest = (id) =>
+  axios({
+    method: "delete",
+    url: url + "decline/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
