@@ -1,13 +1,31 @@
 const { Conversations, Messages } = require("../models");
 const { Op } = require("sequelize");
 
+const getAllUserConversations = async (req, res) => {
+  const { id } = req.params;
+
+  await Conversations.findAll({
+    where: {
+      [Op.or]: [{ userID1: id }, { userID2: id }],
+    },
+  })
+    .then((conversations) => {
+      return res.status(201).json(conversations);
+    })
+    .catch((err) => {
+      return res.status(500).json({ error: "Oops! Unable to update user" });
+    });
+};
+
 const getConversation_GET = async (req, res) => {
   const { user1, user2 } = req.params;
 
   await Conversations.findOne({
     where: {
-      [Op.or]: [{ userID1: user1 }, { userID2: user1 }],
-      [Op.or]: [{ userID1: user2 }, { userID2: user2 }],
+      [Op.and]: [
+        { [Op.or]: [{ userID1: user1 }, { userID2: user1 }] },
+        { [Op.or]: [{ userID1: user2 }, { userID2: user2 }] },
+      ],
     },
   })
     .then(async (conversation) => {
@@ -50,4 +68,5 @@ module.exports = {
   getConversation_GET,
   startConversation_POST,
   getConversationMessages_GET,
+  getAllUserConversations,
 };
