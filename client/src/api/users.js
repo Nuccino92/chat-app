@@ -14,3 +14,12 @@ export const updateUserRequest = (id, data) =>
     },
     data,
   });
+
+export const getUserRequest = (id) =>
+  axios({
+    method: "get",
+    url: url + "find/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
