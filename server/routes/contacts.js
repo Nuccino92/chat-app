@@ -15,9 +15,9 @@ router.get("/:id", allContacts_GET);
 router.get("/confirmed/:id", confirmedContacts_GET);
 router.get("/pending/:id", pendingContact_GET);
 router.post("/create/:id", createContact_POST);
-router.put("/accept/:id", acceptContact_PUT);
 
-//deletes contact table
+//id is contact id
+router.put("/accept/:id", acceptContact_PUT);
 router.delete("/decline/:id", declineContact_DELETE);
 
 module.exports = router;
