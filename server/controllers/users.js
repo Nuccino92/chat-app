@@ -29,23 +29,38 @@ const updateUser_PUT = async (req, res) => {
   const { id } = req.params;
   const { firstName, lastName } = req.body;
 
-  const { path } = req.file;
+  if (req.file) {
+    const { path } = req.file;
 
-  const result = await cloudinary.uploader.upload(path);
+    const result = await cloudinary.uploader.upload(path);
 
-  await User.findByPk(id)
-    .then(async (user) => {
-      await user.update({
-        firstName,
-        lastName,
-        profilePicture: result.secure_url,
+    await User.findByPk(id)
+      .then(async (user) => {
+        await user.update({
+          firstName,
+          lastName,
+          profilePicture: result.secure_url,
+        });
+        await user.save();
+        return res.status(201).json(user);
+      })
+      .catch(() => {
+        return res.status(500).json({ error: "Oops! Unable to update user" });
       });
-      await user.save();
-      return res.status(201).json(user);
-    })
-    .catch((err) => {
-      return res.status(500).json({ error: "Oops! Unable to update user" });
-    });
+  } else {
+    await User.findByPk(id)
+      .then(async (user) => {
+        await user.update({
+          firstName,
+          lastName,
+        });
+        await user.save();
+        return res.status(201).json(user);
+      })
+      .catch(() => {
+        return res.status(500).json({ error: "Oops! Unable to update user" });
+      });
+  }
 };
 
 module.exports = {
