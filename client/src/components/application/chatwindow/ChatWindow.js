@@ -3,9 +3,14 @@ import ChatWindowMessage from "./chatWindowMessage/ChatWindowMessage";
 import Picker from "emoji-picker-react";
 import { BsEmojiWink } from "react-icons/bs";
 import { AiOutlineSend } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getUserRequest } from "../../../api/users";
 
 const ChatWindow = () => {
+  const { user } = useSelector((state) => state.userReducer);
+  const { messages } = useSelector((state) => state.chatReducer);
+  const { participant } = useSelector((state) => state.chatReducer);
   const [message, setMessage] = useState("");
   const [emojiPicker, setEmojiPicker] = useState(false);
 
@@ -28,24 +33,18 @@ const ChatWindow = () => {
       {/* header is the current users in the chat */}
       <header>
         <h4>Chatting with</h4>
-        <img
-          src="https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg"
-          alt="User"
-        ></img>
+        {participant ? (
+          <img src={participant.profilePicture} alt="User"></img>
+        ) : null}
       </header>
       <div className="ChatWindow-body">
-        <ChatWindowMessage myMessage={false} />
-        <ChatWindowMessage myMessage={true} />
-        <ChatWindowMessage myMessage={false} />
-        <ChatWindowMessage myMessage={true} />
-        <ChatWindowMessage myMessage={false} />
-        <ChatWindowMessage myMessage={true} />
-        <ChatWindowMessage myMessage={false} />
-        <ChatWindowMessage myMessage={true} />
-        <ChatWindowMessage myMessage={false} />
-        <ChatWindowMessage myMessage={true} />
-        <ChatWindowMessage myMessage={false} />
-        <ChatWindowMessage myMessage={true} />
+        {messages.map((info, index) => {
+          let myMessage;
+          info.senderID === user.id ? (myMessage = true) : (myMessage = false);
+          return (
+            <ChatWindowMessage myMessage={myMessage} info={info} key={index} />
+          );
+        })}
       </div>
       <footer>
         <div className="send-message-container">
