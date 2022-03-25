@@ -4,6 +4,7 @@
   height: 800px;
   overflow-y: scroll;
   background-color: rgb(243, 249, 253);
+  width: 690px;
   border-radius: 8px;
 }
 

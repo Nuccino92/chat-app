@@ -1,17 +1,12 @@
 .Contact {
   display: flex;
   position: relative;
-  cursor: pointer;
-  padding: 11px 11px 11px 0;
+  padding: 11px;
   margin: 10px 0;
   border-radius: 8px;
   width: 600px;
   background-color: white;
   border: 1px solid rgba(128, 128, 128, 0.057);
-}
-
-.Contact:hover {
-  background-color: rgba(0, 72, 187, 0.219);
 }
 
 .Contact > img {
@@ -43,16 +38,38 @@
   opacity: 0.5;
   font-weight: 600;
 }
+.message-contact {
+  cursor: pointer;
+  content: attr(title);
+  margin-right: 17px;
+  color: rgb(77, 92, 156);
+}
+
+.message-contact:hover {
+  transform: scale(1.2);
+}
 
 .delete-contact {
-  color: rgb(158, 8, 8);
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  margin: 0 20px 20px 0;
+  color: rgb(156, 126, 77);
   content: attr(title);
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.delete-contact:hover {
+  transform: scale(0.84);
 }
 
 .deleted {
   display: none;
+}
+
+.Contact-buttons {
+  position: absolute;
+  bottom: 0;
+  margin: 0 20px 20px 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  align-items: center;
 }
