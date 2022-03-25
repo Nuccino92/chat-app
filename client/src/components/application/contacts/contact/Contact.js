@@ -3,21 +3,44 @@ import { BsTrash } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { deleteContactRequest } from "../../../../api/contact";
 import { getUserRequest } from "../../../../api/users";
-import { useSelector } from "react-redux";
-import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteConversation,
+  getConversation,
+} from "../../../../redux/actions/chat";
+import { BiMessageDetail } from "react-icons/bi";
+import { GET_PARTICIPANT } from "../../../../redux/actions/types";
 
-const Contact = ({ contact }) => {
+const Contact = ({ contact, setTab }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userReducer);
 
   const [deleted, setDeleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user2Info, setUser2Info] = useState(null);
 
+  const { userID1, userID2, id } = contact;
+
   const handleDelete = async () => {
-    await deleteContactRequest(contact.id).then(() => {
-      // wait to make sure delete works before changing state
-      setDeleted(true);
-    });
+    await deleteContactRequest(id)
+      .then(async () => {
+        await dispatch(deleteConversation(userID1, userID2))
+          .then(() => {
+            setDeleted(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleMessage = () => {
+    dispatch(getConversation(userID1, userID2));
+    dispatch({ type: GET_PARTICIPANT, payload: user2Info });
+    setTab("home");
   };
 
   useEffect(() => {
@@ -27,15 +50,13 @@ const Contact = ({ contact }) => {
         setLoading(false);
       });
     };
-    if (contact.userID1 !== user.id) {
-      getUser(contact.userID1);
+    if (userID1 !== user.id) {
+      getUser(userID1);
     }
-    if (contact.userID2 !== user.id) {
-      getUser(contact.userID2);
+    if (userID2 !== user.id) {
+      getUser(userID2);
     }
-  }, [contact.userID1, contact.userID2, user.id]);
-
-  console.log(new Date(contact.createdAt).toDateString());
+  }, [user.id, userID1, userID2]);
 
   return (
     <>
@@ -55,12 +76,20 @@ const Contact = ({ contact }) => {
             </div>
             <p> I like to eat cake and cho..</p>
           </div>
-          <BsTrash
-            className="delete-contact"
-            size={20}
-            title="Delete contact"
-            onClick={handleDelete}
-          />
+          <div className="Contact-buttons">
+            <BiMessageDetail
+              size={30}
+              title="Send message"
+              className="message-contact"
+              onClick={handleMessage}
+            />
+            <BsTrash
+              className="delete-contact"
+              size={20}
+              title="Delete contact"
+              onClick={handleDelete}
+            />
+          </div>
         </div>
       )}
     </>
