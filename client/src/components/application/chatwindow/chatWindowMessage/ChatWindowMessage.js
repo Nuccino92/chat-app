@@ -1,9 +1,28 @@
+import { useEffect, useState } from "react";
+import { getUserRequest } from "../../../../api/users";
 import "./ChatWindowMessage.css";
 
-const ChatWindowMessage = ({ myMessage }) => {
+const ChatWindowMessage = ({ info, myMessage }) => {
+  const { content, createdAt, senderID } = info;
+
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      await getUserRequest(senderID).then((res) => {
+        setUserData(res.data);
+        setLoading(false);
+      });
+    };
+    getUserInfo();
+  }, [senderID]);
+
   return (
     <>
-      {myMessage ? (
+      {loading ? (
+        <></>
+      ) : myMessage ? (
         <div className="ChatWindowMessage message-sent">
           <div>
             <span
@@ -12,28 +31,28 @@ const ChatWindowMessage = ({ myMessage }) => {
                 fontWeight: "500",
               }}
             >
-              your message &#160; 4:44 am
+              your message &#160; {new Date(createdAt).toDateString()}
             </span>
-            <p>I need to go to the gym and eat a box of curry chicken </p>
+            <p>{content} </p>
           </div>
         </div>
       ) : (
         <div className="ChatWindowMessage message-received">
-          <img
-            src="https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg"
-            alt="Profile"
-          ></img>
+          <img src={userData.profilePicture} alt="Profile"></img>
           <div>
-            <span>Junimo Miller</span>&#160;
+            <span>
+              {userData.firstName} {userData.lastName}
+            </span>
+            &#160;
             <span
               style={{
                 fontSize: "13px",
                 fontWeight: "500",
               }}
             >
-              4:15 am
+              {new Date(createdAt).toDateString()}
             </span>
-            <p>I ate some bad food man</p>
+            <p>{content}</p>
           </div>
         </div>
       )}

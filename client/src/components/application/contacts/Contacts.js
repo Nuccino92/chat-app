@@ -58,7 +58,9 @@ const Contacts = ({ setTab }) => {
             </header>
             <div className="Contacts-body">
               {contacts.map((contact, index) => {
-                return <Contact contact={contact} key={index} />;
+                return (
+                  <Contact setTab={setTab} contact={contact} key={index} />
+                );
               })}
             </div>
           </animated.div>
