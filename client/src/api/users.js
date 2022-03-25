@@ -4,7 +4,6 @@ const url = "http://localhost:8000/user/";
 
 export const userAuthRequest = (headers) => axios.get(url + "auth", headers);
 
-//PUT
 export const updateUserRequest = (id, data) =>
   axios({
     method: "put",

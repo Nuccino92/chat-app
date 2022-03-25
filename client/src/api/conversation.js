@@ -11,20 +11,41 @@ export const getUserConversations = (id) =>
     },
   });
 
-//GET
-export const getConversationRequest = () => {
-  //PARAMS (USER1, USER2) 2 PARAMS
-  console.log("contact found");
-};
+export const getConversationRequest = (id1, id2) =>
+  axios({
+    method: "get",
+    url: url + "find/" + id1 + "/" + id2,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
-//POST
-export const startConversationRequest = (body) => {
-  //PARAMS
-  console.log("convo started");
-};
+export const startConversationRequest = (id, body) =>
+  axios({
+    method: "post",
+    url: url + "start/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data: {
+      user2: body,
+    },
+  });
 
-//GET
-export const getConversationMessagesRequest = () => {
-  //PARAMS
-  console.log("got messages");
-};
+export const getConversationMessagesRequest = (id) =>
+  axios({
+    method: "get",
+    url: url + "messages/" + id,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+export const deleteConversationRequest = (id1, id2) =>
+  axios({
+    method: "delete",
+    url: url + "delete/" + id1 + "/" + id2,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
