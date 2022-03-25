@@ -1,4 +1,4 @@
-const { Contact } = require("../models");
+const { Contact, sequelize } = require("../models");
 const { Op } = require("sequelize");
 
 const allContacts_GET = async (req, res) => {
@@ -69,14 +69,8 @@ const createContact_POST = async (req, res) => {
 
 const acceptContact_PUT = async (req, res) => {
   const { id } = req.params;
-  const { user2 } = req.body;
 
-  await Contact.findOne({
-    where: {
-      [Op.or]: [{ userID1: id }, { userID2: id }],
-      [Op.or]: [{ userID1: user2 }, { userID2: user2 }],
-    },
-  })
+  await Contact.findByPk(id)
     .then(async (contact) => {
       await contact.update({ confirmed: 1 });
       await contact.save();
@@ -89,14 +83,8 @@ const acceptContact_PUT = async (req, res) => {
 
 const declineContact_DELETE = async (req, res) => {
   const { id } = req.params;
-  const { user2 } = req.body;
 
-  await Contact.findOne({
-    where: {
-      [Op.or]: [{ userID1: id }, { userID2: id }],
-      [Op.or]: [{ userID1: user2 }, { userID2: user2 }],
-    },
-  })
+  await Contact.findByPk(id)
     .then(async (contact) => {
       await contact.destroy();
       return res.status(201).json({ msg: "user deleted" });
