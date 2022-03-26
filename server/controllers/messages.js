@@ -1,7 +1,7 @@
 const { Messages } = require("../models");
 
 const createMessage_POST = async (req, res) => {
-  const { conversationID, senderID, content } = req.body;
+  const { conversationID, senderID, content } = req.body.body;
 
   await Messages.create({
     conversationID,
