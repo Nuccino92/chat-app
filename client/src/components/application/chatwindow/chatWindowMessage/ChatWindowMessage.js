@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUserRequest } from "../../../../api/users";
+import moment from "moment";
 import "./ChatWindowMessage.css";
 
 const ChatWindowMessage = ({ info, myMessage }) => {
@@ -31,7 +32,7 @@ const ChatWindowMessage = ({ info, myMessage }) => {
                 fontWeight: "500",
               }}
             >
-              your message &#160; {new Date(createdAt).toDateString()}
+              {moment(new Date(createdAt)).fromNow()}
             </span>
             <p>{content} </p>
           </div>
@@ -50,7 +51,7 @@ const ChatWindowMessage = ({ info, myMessage }) => {
                 fontWeight: "500",
               }}
             >
-              {new Date(createdAt).toDateString()}
+              {moment(new Date(createdAt)).fromNow()}
             </span>
             <p>{content}</p>
           </div>
