@@ -28,8 +28,8 @@ const upload = multer({
   },
 });
 
-router.get("/find/:id", getUser_GET);
+router.get("/find/:id", auth, getUser_GET);
 router.get("/auth", auth, authUser_GET);
-router.put("/:id", upload.single("profilePicture"), updateUser_PUT);
+router.put("/:id", auth, upload.single("profilePicture"), updateUser_PUT);
 
 module.exports = router;

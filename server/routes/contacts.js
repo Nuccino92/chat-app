@@ -1,4 +1,6 @@
 const express = require("express");
+const passport = require("passport");
+
 const {
   createContact_POST,
   acceptContact_PUT,
@@ -10,14 +12,16 @@ const {
 
 const router = express.Router();
 
+const auth = passport.authenticate("jwt", { session: false });
+
 // id is user making request
-router.get("/:id", allContacts_GET);
-router.get("/confirmed/:id", confirmedContacts_GET);
-router.get("/pending/:id", pendingContact_GET);
-router.post("/create/:id", createContact_POST);
+router.get("/:id", auth, allContacts_GET);
+router.get("/confirmed/:id", auth, confirmedContacts_GET);
+router.get("/pending/:id", auth, pendingContact_GET);
+router.post("/create/:id", auth, createContact_POST);
 
 //id is contact id
-router.put("/accept/:id", acceptContact_PUT);
-router.delete("/decline/:id", declineContact_DELETE);
+router.put("/accept/:id", auth, acceptContact_PUT);
+router.delete("/decline/:id", auth, declineContact_DELETE);
 
 module.exports = router;
