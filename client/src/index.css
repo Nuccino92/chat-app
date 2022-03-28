@@ -7,7 +7,7 @@
   font-family: "Josefin Sans", sans-serif;
 }
 body {
-  background: #add8e6;
+  background-image: url("./images/background.png");
 }
 
 input {
