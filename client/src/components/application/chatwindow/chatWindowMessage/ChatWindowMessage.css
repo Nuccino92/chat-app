@@ -52,8 +52,9 @@
 }
 
 .message-received > div > p {
-  background-color: rgb(161, 214, 245);
+  background-color: rgb(67, 105, 128);
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
+  color: white;
 }

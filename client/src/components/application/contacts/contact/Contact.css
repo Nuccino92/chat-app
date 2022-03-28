@@ -73,3 +73,13 @@
   width: 50%;
   align-items: center;
 }
+
+.online-contact {
+  height: 13px;
+  max-width: 13px;
+  border-radius: 50%;
+  background-color: rgb(75, 243, 24);
+  position: absolute;
+  margin-top: 27px;
+  margin-left: 27px;
+}
