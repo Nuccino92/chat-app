@@ -21,6 +21,8 @@
 
 .ChatWindow-body {
   background-color: rgb(243, 249, 253);
+  background-image: url("../../../images/chat-background.png");
+  background-size: cover;
   overflow-y: scroll;
   height: 695px;
 }
@@ -46,29 +48,33 @@
   border-radius: 20px;
   z-index: 10;
   overflow: hidden;
+  width: 80%;
 }
 
 .send-message-container > input {
   box-shadow: none;
   background: none;
   font-size: 17px;
+  width: 100%;
 }
 
 .send-message-button {
   cursor: pointer;
   align-items: center;
   display: flex;
-  padding: 10px;
+  padding: 9px;
   border-radius: 50%;
-  background-color: rgb(85, 45, 218);
+  background-color: rgb(22, 18, 241);
 }
 
 .send-message-button:hover {
   filter: brightness(1.2);
+  transform: scale(1.05);
 }
 
 .send-message-button:active {
   filter: brightness(0.9);
+  transform: scale(1.02);
 }
 
 .no-chat-text {
