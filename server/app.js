@@ -3,6 +3,10 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const passport = require("passport");
 
+const socket = require("socket.io");
+
+const { addUser, getUser, removeUser, users } = require("./utils/socket");
+
 const { sequelize } = require("./models");
 require("./config/passport.js");
 
@@ -24,9 +28,37 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, async () => {
+const server = app.listen(PORT, async () => {
   console.log(`server connected on ${PORT}`);
   await sequelize.authenticate();
+});
+
+const io = socket(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.on("connection", (socket) => {
+  socket.on("addUser", (userId) => {
+    addUser(userId, socket.id);
+    io.emit("getUsers", users);
+  });
+
+  socket.on("sendMessage", ({ senderId, receiverId, content }) => {
+    const user = getUser(receiverId);
+    if (user !== undefined) {
+      io.to(user.socketId).emit("getMessage", {
+        senderId,
+        content,
+      });
+    }
+  });
+
+  socket.on("logOut", () => {
+    removeUser(socket.Id);
+    io.emit("getUsers", users);
+  });
 });
 
 app.use("/register", registerRoutes);
