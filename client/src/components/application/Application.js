@@ -14,7 +14,7 @@ const Application = () => {
       {tab === "home" && (
         <>
           {" "}
-          <Nav setTab={setTab}></Nav>
+          <Nav setTab={setTab} />
           <div className="Application-body">
             <Sidenav />
             <ChatWindow />
