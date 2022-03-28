@@ -7,6 +7,11 @@ import { useSelector } from "react-redux";
 import { getUserConversations } from "../../../api/conversation";
 import { getUserRequest } from "../../../api/users";
 
+import { io } from "socket.io-client";
+
+let socket;
+const CONNECTION_PORT = "http://localhost:8000/";
+
 const Sidenav = () => {
   const { user } = useSelector((state) => state.userReducer);
 
@@ -26,6 +31,15 @@ const Sidenav = () => {
     word === "" ? setFitleredData(users) : setFitleredData(newFilter);
   };
 
+  useEffect(() => {
+    socket = io(CONNECTION_PORT);
+  }, []);
+
+  useEffect(() => {
+    socket.emit("addUser", user.id);
+  }, [user]);
+
+  //get user conversations, then get other participants information, then setUsers & setFilteredData to that information
   useEffect(() => {
     const getConversations = async () => {
       await getUserConversations(user.id).then((res) => {

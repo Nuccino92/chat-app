@@ -9,6 +9,11 @@ import { useSelector } from "react-redux";
 import { getConfirmedContactsRequest } from "../../../api/contact";
 import { getUserRequest } from "../../../api/users";
 
+import { io } from "socket.io-client";
+
+let socket;
+const CONNECTION_PORT = "http://localhost:8000/";
+
 const Contacts = ({ setTab }) => {
   const inputRef = useRef();
   const { user } = useSelector((state) => state.userReducer);
@@ -18,6 +23,8 @@ const Contacts = ({ setTab }) => {
 
   const [users, setUsers] = useState([]);
   const [filteredData, setFitleredData] = useState([]);
+
+  const [connectedUsers, setConnectedUsers] = useState([]);
 
   const style = useSpring({
     from: { opacity: 0 },
@@ -61,6 +68,17 @@ const Contacts = ({ setTab }) => {
     getContacts();
   }, [user.id]);
 
+  useEffect(() => {
+    socket = io(CONNECTION_PORT);
+  }, []);
+
+  useEffect(() => {
+    socket.emit("addUser", user.id);
+    socket.on("getUsers", (users) => {
+      setConnectedUsers(users);
+    });
+  }, [user]);
+
   return (
     <>
       {loading ? (
@@ -94,8 +112,16 @@ const Contacts = ({ setTab }) => {
             </header>
             <div className="Contacts-body">
               {filteredData.map((contact, index) => {
+                const onlineStatus = connectedUsers.some(
+                  (active) => active.userId === contact.id
+                );
                 return (
-                  <Contact setTab={setTab} contact={contact} key={index} />
+                  <Contact
+                    setTab={setTab}
+                    contact={contact}
+                    key={index}
+                    onlineStatus={onlineStatus}
+                  />
                 );
               })}
             </div>

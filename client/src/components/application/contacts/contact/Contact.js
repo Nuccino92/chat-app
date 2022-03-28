@@ -11,7 +11,7 @@ import {
 import { BiMessageDetail } from "react-icons/bi";
 import { GET_PARTICIPANT } from "../../../../redux/actions/types";
 
-const Contact = ({ contact, setTab }) => {
+const Contact = ({ contact, setTab, onlineStatus }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userReducer);
 
@@ -44,6 +44,7 @@ const Contact = ({ contact, setTab }) => {
   return (
     <div className={deleted ? "Contact deleted" : "Contact"}>
       <img src={contact.profilePicture} alt="Contact"></img>
+      {onlineStatus && <div className="online-contact"></div>}
       <div>
         <div>
           <h4>

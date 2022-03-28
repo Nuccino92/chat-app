@@ -3,9 +3,14 @@ import { useSpring, animated } from "react-spring";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser, logOutUser } from "../../../redux/actions/user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateUserRequest } from "../../../api/users";
 import convertBase64 from "../../../utils/base64";
+
+import { io } from "socket.io-client";
+
+let socket;
+const CONNECTION_PORT = "http://localhost:8000/";
 
 const Profile = ({ setTab }) => {
   const dispatch = useDispatch();
@@ -64,7 +69,13 @@ const Profile = ({ setTab }) => {
 
   const handleLogout = () => {
     dispatch(logOutUser());
+
+    socket.emit("logOut", (users) => console.log(users));
   };
+
+  useEffect(() => {
+    socket = io(CONNECTION_PORT);
+  }, []);
 
   return (
     <div className="Profile">

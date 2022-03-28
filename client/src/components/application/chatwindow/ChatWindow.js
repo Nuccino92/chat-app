@@ -9,14 +9,20 @@ import { createMessageRequest } from "../../../api/messages";
 import logo from "../../../images/chatify-logo.png";
 import { getConversation } from "../../../redux/actions/chat";
 
+import { io } from "socket.io-client";
+
+let socket;
+const CONNECTION_PORT = "http://localhost:8000/";
+
 const ChatWindow = () => {
   const scrollRef = useRef();
   const inputRef = useRef(null);
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.userReducer);
-  const { messages, chat } = useSelector((state) => state.chatReducer);
-  const { participant } = useSelector((state) => state.chatReducer);
+  const { messages, chat, participant } = useSelector(
+    (state) => state.chatReducer
+  );
 
   const [message, setMessage] = useState("");
   const [emojiPicker, setEmojiPicker] = useState(false);
@@ -25,6 +31,11 @@ const ChatWindow = () => {
     senderID: user.id,
     content: "",
   });
+
+  const [updatedMessages, setUpdatedMessages] = useState([]);
+
+  // holds the socket emitted message
+  const [arrivalMessage, setArrivalMessage] = useState(null);
 
   const onEmojiClick = (event, emojiObject) => {
     setMessage((prevInput) => prevInput + emojiObject.emoji);
@@ -51,22 +62,38 @@ const ChatWindow = () => {
     if (!createMessageData.content) return;
     await createMessageRequest(createMessageData).then(() => {
       dispatch(getConversation(chat.userID1, chat.userID2));
+
+      socket.emit("sendMessage", {
+        senderId: user.id,
+        receiverId: participant.id,
+        content: message.content,
+      });
     });
+
     setCreateMessageData((prev) => {
       return {
         ...prev,
         content: "",
       };
     });
+
     setMessage("");
   };
 
+  useEffect(() => {
+    setUpdatedMessages(messages);
+  }, [messages]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      scrollRef.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 400);
+  }, [updatedMessages]);
+
   // keep content fully updated if last character was emoji in content
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-
     setCreateMessageData((prev) => {
       return {
         ...prev,
@@ -84,6 +111,28 @@ const ChatWindow = () => {
       };
     });
   }, [chat]);
+
+  // if arrival message and inside the correct conversation, update conversation messages
+  useEffect(() => {
+    arrivalMessage &&
+      (chat.userID1 === arrivalMessage.sender ||
+        chat.userID2 === arrivalMessage.sender) &&
+      setUpdatedMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, chat]);
+
+  useEffect(() => {
+    socket = io(CONNECTION_PORT);
+  }, []);
+
+  useEffect(() => {
+    socket.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        content: data.content,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
 
   return (
     <div className="ChatWindow">
@@ -105,12 +154,12 @@ const ChatWindow = () => {
           </div>
         )}
 
-        {messages.map((info, index) => {
+        {updatedMessages.map((info, index) => {
           let myMessage;
           info.senderID === user.id ? (myMessage = true) : (myMessage = false);
 
           return (
-            <div ref={scrollRef} key={index}>
+            <div key={index} ref={scrollRef}>
               <ChatWindowMessage
                 myMessage={myMessage}
                 info={info}
@@ -147,7 +196,7 @@ const ChatWindow = () => {
           className="send-message-button"
           onClick={handleSubmit}
         >
-          <AiOutlineSend color="white" size={20} />
+          <AiOutlineSend color="white" size={17} />
         </div>
       </footer>
     </div>
