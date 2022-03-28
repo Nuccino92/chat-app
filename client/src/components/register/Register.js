@@ -10,7 +10,7 @@ import { clearErrors } from "../../redux/actions/error";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { message, param, id } = useSelector((state) => state.errorReducer);
+  const { message } = useSelector((state) => state.errorReducer);
 
   const [userData, setUserData] = useState({
     firstName: "",
