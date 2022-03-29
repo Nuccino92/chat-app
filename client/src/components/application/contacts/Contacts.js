@@ -64,6 +64,7 @@ const Contacts = ({ setTab }) => {
           });
         });
       });
+      setLoading(false);
     };
     getContacts();
   }, [user.id]);
