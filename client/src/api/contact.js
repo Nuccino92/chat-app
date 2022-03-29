@@ -50,10 +50,10 @@ export const acceptContactRequest = (id) =>
     },
   });
 
-export const deleteContactRequest = (id) =>
+export const deleteContactRequest = (id, id2) =>
   axios({
     method: "delete",
-    url: url + "decline/" + id,
+    url: url + "decline/" + id + "/" + id2,
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },

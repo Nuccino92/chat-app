@@ -82,14 +82,23 @@ const acceptContact_PUT = async (req, res) => {
 };
 
 const declineContact_DELETE = async (req, res) => {
-  const { id } = req.params;
+  const { user1, user2 } = req.params;
 
-  await Contact.findByPk(id)
+  await Contact.findOne({
+    where: {
+      [Op.and]: [
+        { [Op.or]: [{ userID1: user1 }, { userID2: user1 }] },
+        { [Op.or]: [{ userID1: user2 }, { userID2: user2 }] },
+      ],
+    },
+  })
+
     .then(async (contact) => {
       await contact.destroy();
       return res.status(201).json({ msg: "user deleted" });
     })
     .catch((err) => {
+      console.log(err);
       return res.status(500).json({ error: "Oops! Unable to update user" });
     });
 };

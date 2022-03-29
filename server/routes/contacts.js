@@ -22,6 +22,6 @@ router.post("/create/:id", auth, createContact_POST);
 
 //id is contact id
 router.put("/accept/:id", auth, acceptContact_PUT);
-router.delete("/decline/:id", auth, declineContact_DELETE);
+router.delete("/decline/:user1/:user2", auth, declineContact_DELETE);
 
 module.exports = router;
