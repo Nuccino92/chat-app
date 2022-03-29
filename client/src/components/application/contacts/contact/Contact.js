@@ -20,7 +20,7 @@ const Contact = ({ contact, setTab, onlineStatus }) => {
   const { id } = contact;
 
   const handleDelete = async () => {
-    await deleteContactRequest(id)
+    await deleteContactRequest(id, user.id)
       .then(async () => {
         await dispatch(deleteConversation(user.id, id))
           .then(() => {

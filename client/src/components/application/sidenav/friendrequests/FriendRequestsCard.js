@@ -35,7 +35,7 @@ const FriendRequestsCard = ({ request }) => {
   };
 
   const handleDecline = async () => {
-    await deleteContactRequest(id).then(() => {
+    await deleteContactRequest(userID1, userID2).then(() => {
       setChosen(true);
     });
   };
