@@ -12,7 +12,7 @@ import { getConversation } from "../../../redux/actions/chat";
 import { io } from "socket.io-client";
 
 let socket;
-const CONNECTION_PORT = "http://localhost:8000/";
+const CONNECTION_PORT = "https://calm-shore-98024.herokuapp.com/";
 
 const ChatWindow = () => {
   const scrollRef = useRef();

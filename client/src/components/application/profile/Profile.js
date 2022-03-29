@@ -10,7 +10,7 @@ import convertBase64 from "../../../utils/base64";
 import { io } from "socket.io-client";
 
 let socket;
-const CONNECTION_PORT = "http://localhost:8000/";
+const CONNECTION_PORT = "https://calm-shore-98024.herokuapp.com/";
 
 const Profile = ({ setTab }) => {
   const dispatch = useDispatch();
