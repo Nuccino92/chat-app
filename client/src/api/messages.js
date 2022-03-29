@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000/messages/";
+const url = "https://calm-shore-98024.herokuapp.com/messages/";
 
 //POST
 export const createMessageRequest = (body) =>

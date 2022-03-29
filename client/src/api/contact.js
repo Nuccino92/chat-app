@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000/contact/";
+const url = "https://calm-shore-98024.herokuapp.com/contact/";
 
 export const getAllContactsRequest = (id) =>
   axios({

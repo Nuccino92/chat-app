@@ -1,5 +1,5 @@
 import axios from "axios";
 
-const url = "http://localhost:8000/logIn/";
+const url = "https://calm-shore-98024.herokuapp.com/logIn/";
 
 export const logInRequest = (body) => axios.post(url, body);

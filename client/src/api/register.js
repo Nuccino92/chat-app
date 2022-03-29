@@ -1,5 +1,5 @@
 import axios from "axios";
 
-const url = "http://localhost:8000/register/";
+const url = "https://calm-shore-98024.herokuapp.com/register/";
 
 export const registerRequest = (body) => axios.post(url, body);
