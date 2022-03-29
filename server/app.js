@@ -61,6 +61,10 @@ io.on("connection", (socket) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("working");
+});
+
 app.use("/register", registerRoutes);
 app.use("/contact", contactRoutes);
 app.use("/logIn", logInRoutes);
