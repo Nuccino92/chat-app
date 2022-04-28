@@ -65,7 +65,7 @@
   width: 300px;
 }
 
-.Login-right > form > button {
+.Login-right > form > .login-btn {
   background-image: linear-gradient(#0dccea, #0d70ea);
   border: 0;
   border-radius: 4px;
@@ -101,6 +101,15 @@
   bottom: 0;
   margin-bottom: 30px;
   font-size: 16px;
+}
+
+.guest-account-btn {
+  color: blue;
+  font-size: 17px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 940px) {

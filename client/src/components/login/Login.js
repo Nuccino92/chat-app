@@ -28,6 +28,17 @@ const Login = () => {
     }
   };
 
+  const handleGuestAccount = (e) => {
+    // data for guest account
+    const guestAccountData = {
+      email: "guestaccount@gmail.com",
+      password: "password123",
+    };
+
+    e.preventDefault();
+    dispatch(logInUser(guestAccountData));
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -74,7 +85,12 @@ const Login = () => {
             type="password"
             placeholder="password"
           />
-          <button onClick={handleSubmit}>Log in</button>
+          <button className="guest-account-btn" onClick={handleGuestAccount}>
+            Use guest account
+          </button>
+          <button className="login-btn" onClick={handleSubmit}>
+            Log in
+          </button>
           {error && <FormError message={message} location={"logIn"} />}
         </form>
 
