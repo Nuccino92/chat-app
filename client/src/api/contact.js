@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = `${process.env.REACT_APP_SERVER_URL}/contact/`;
+const url = `${process.env.REACT_APP_SERVER_URL}contact/`;
 
 export const getAllContactsRequest = (id) =>
   axios({

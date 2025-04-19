@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = `${process.env.REACT_APP_SERVER_URL}/conversation/`;
+const url = `${process.env.REACT_APP_SERVER_URL}conversation/`;
 
 export const getUserConversations = (id) =>
   axios({

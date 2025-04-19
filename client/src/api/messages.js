@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = `${process.env.REACT_APP_SERVER_URL}/messages/`;
+const url = `${process.env.REACT_APP_SERVER_URL}messages/`;
 
 //POST
 export const createMessageRequest = (body) =>
