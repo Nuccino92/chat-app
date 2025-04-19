@@ -2,24 +2,36 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    username: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-    host: process.env.HOST,
+    use_env_variable: "MYSQL_PUBLIC_URL",
     dialect: "mysql",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 60000,
+      idle: 10000,
+    },
   },
   test: {
-    username: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-    host: process.env.HOST,
+    use_env_variable: "MYSQL_PUBLIC_URL",
     dialect: "mysql",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
   },
   production: {
-    username: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-    host: process.env.HOST,
+    use_env_variable: "MYSQL_PUBLIC_URL",
     dialect: "mysql",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
   },
 };
