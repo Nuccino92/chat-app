@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://calm-shore-98024.herokuapp.com/user/";
+const url = `${process.env.REACT_APP_SERVER_URL}/user/`;
 
 export const userAuthRequest = (headers) => axios.get(url + "auth", headers);
 
